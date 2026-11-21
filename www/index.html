@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: blob: gap: https://ssl.gstatic.com 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src * data: blob:; connect-src *; media-src *; frame-src https://www.openstreetmap.org;">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="color-scheme" content="light dark">
+  <title>Incident Watch</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="top">
+    <button id="back" class="icon" aria-label="Back" hidden>&#8592;</button>
+    <h1 id="title">Incident Watch</h1>
+    <button id="refresh" class="icon" aria-label="Refresh">&#8635;<span id="badge" hidden>0</span></button>
+  </header>
+
+  <main>
+    <!-- FEED -->
+    <section id="v-feed" class="view">
+      <div id="chips" class="chips" role="tablist" aria-label="Filter by category"></div>
+      <div id="list" class="list"></div>
+      <button id="more" class="ghost wide" hidden>Load more</button>
+    </section>
+
+    <!-- DETAIL -->
+    <section id="v-detail" class="view"></section>
+
+    <!-- REPORT -->
+    <section id="v-report" class="view">
+      <div class="field">
+        <label>What happened?</label>
+        <div id="catPick" class="chips wrap"></div>
+      </div>
+      <div class="field">
+        <label for="rTitle">Short headline</label>
+        <input id="rTitle" maxlength="80" placeholder="e.g. Two cars collided at the roundabout">
+      </div>
+      <div class="field">
+        <label for="rDesc">Details</label>
+        <textarea id="rDesc" rows="4" placeholder="What is happening? Are people hurt? Which road or landmark is closest?"></textarea>
+      </div>
+      <div class="field">
+        <label>Location</label>
+        <div id="locBox" class="locbox">
+          <div id="locText">Locating you&hellip;</div>
+          <button type="button" id="relocate" class="ghost small">Update location</button>
+        </div>
+        <input id="rAddr" maxlength="120" placeholder="Street or landmark (optional)">
+      </div>
+      <div class="field">
+        <label>Photos <span class="hint" id="photoCount">0 of 4</span></label>
+        <div id="thumbs" class="thumbs"></div>
+        <label class="ghost wide filebtn" for="rFile">Take or choose photos</label>
+        <input id="rFile" type="file" accept="image/*" multiple hidden>
+      </div>
+      <button id="submit" class="primary wide">Post incident</button>
+      <div id="progress" class="progress" hidden><div></div></div>
+    </section>
+
+    <!-- MY INCIDENTS -->
+    <section id="v-mine" class="view">
+      <div id="who" class="who"></div>
+      <div id="mylist" class="list"></div>
+    </section>
+
+    <!-- LOGIN / REGISTER -->
+    <section id="v-auth" class="view">
+      <div class="seg" role="tablist">
+        <button id="tabLogin" class="on" type="button">Log in</button>
+        <button id="tabReg" type="button">Create account</button>
+      </div>
+      <p class="lede" id="authLede">Log in to report incidents and see the ones you have posted.</p>
+      <form id="authForm" autocomplete="on">
+        <div class="field"><label for="aUser">Username</label><input id="aUser" autocomplete="username" autocapitalize="none" required></div>
+        <div class="field" id="emailRow" hidden><label for="aEmail">Email</label><input id="aEmail" type="email" autocomplete="email"></div>
+        <div class="field"><label for="aPass">Password</label><input id="aPass" type="password" autocomplete="current-password" required></div>
+        <button id="authBtn" class="primary wide" type="submit">Log in</button>
+      </form>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-go="feed" class="on"><i>&#9776;</i>Incidents</button>
+    <button data-go="report" class="cta"><i>+</i>Report</button>
+    <button data-go="mine"><i>&#9786;</i>Mine</button>
+  </nav>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="cordova.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

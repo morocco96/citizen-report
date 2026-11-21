@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="net.example.citizenreporter" version="1.0.0"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Incident Watch</name>
+    <description>Citizen incident reporting app</description>
+    <author email="dev@example.com" href="https://example.com">Developer</author>
+    <content src="index.html" />
+
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="geo:*" />
+    <access origin="*" />
+
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="StatusBarBackgroundColor" value="#FFC400" />
+    <preference name="StatusBarStyle" value="default" />
+
+    <platform name="android">
+        <preference name="scheme" value="https" />
+        <preference name="hostname" value="localhost" />
+        <!-- DEV ONLY: lets the app talk to an http:// WordPress site. Remove once your site uses HTTPS. -->
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
+
+    <platform name="ios">
+        <preference name="scheme" value="app" />
+        <preference name="hostname" value="localhost" />
+        <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+            <string>Your location is attached to the incident you report.</string>
+        </edit-config>
+        <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+            <string>Take a photo of the incident to attach to your report.</string>
+        </edit-config>
+        <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+            <string>Choose photos of the incident to attach to your report.</string>
+        </edit-config>
+    </platform>
+
+    <plugin name="cordova-plugin-geolocation" spec="^5.0.0" />
+    <plugin name="cordova-plugin-camera" spec="^7.0.0" />
+    <plugin name="cordova-plugin-local-notification" spec="^1.2.1" />
+    <plugin name="cordova-plugin-statusbar" spec="^3.0.0" />
+</widget>
